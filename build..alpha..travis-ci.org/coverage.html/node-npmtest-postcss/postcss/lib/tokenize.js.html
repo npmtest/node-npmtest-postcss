@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-postcss/postcss/lib/tokenize.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-postcss">npmtest-postcss (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-postcss/postcss/lib/tokenize.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">16.27% <small>(27 / 166)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 86)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">16.27% <small>(27 / 166)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-postcss/postcss/lib/</a> &#187; tokenize.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+exports.__esModule = true;
+exports.default = tokenize;
+var SINGLE_QUOTE = 39;
+var DOUBLE_QUOTE = 34;
+var BACKSLASH = 92;
+var SLASH = 47;
+var NEWLINE = 10;
+var SPACE = 32;
+var FEED = 12;
+var TAB = 9;
+var CR = 13;
+var OPEN_SQUARE = 91;
+var CLOSE_SQUARE = 93;
+var OPEN_PARENTHESES = 40;
+var CLOSE_PARENTHESES = 41;
+var OPEN_CURLY = 123;
+var CLOSE_CURLY = 125;
+var SEMICOLON = 59;
+var ASTERISK = 42;
+var COLON = 58;
+var AT = 64;
+&nbsp;
+var RE_AT_END = /[ \n\t\r\f\{\(\)'"\\;/\[\]#]/g;
+var RE_WORD_END = /[ \n\t\r\f\(\)\{\}:;@!'"\\\]\[#]|\/(?=\*)/g;
+var RE_BAD_BRACKET = /.[\\\/\("'\n]/;
+&nbsp;
+<span class="fstat-no" title="function not covered" >function tokenize(input) {</span>
+<span class="cstat-no" title="statement not covered" >    var options = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var tokens = [];</span>
+<span class="cstat-no" title="statement not covered" >    var css = input.css.valueOf();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var ignore = options.ignoreErrors;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var code = void 0,</span>
+        next = void 0,
+        quote = void 0,
+        lines = void 0,
+        last = void 0,
+        content = void 0,
+        escape = void 0,
+        nextLine = void 0,
+        nextOffset = void 0,
+        escaped = void 0,
+        escapePos = void 0,
+        prev = void 0,
+        n = void 0;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var length = css.length;</span>
+<span class="cstat-no" title="statement not covered" >    var offset = -1;</span>
+<span class="cstat-no" title="statement not covered" >    var line = 1;</span>
+<span class="cstat-no" title="statement not covered" >    var pos = 0;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >    function unclosed(what) {</span>
+<span class="cstat-no" title="statement not covered" >        throw input.error('Unclosed ' + what, line, pos - offset);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    while (pos &lt; length) {</span>
+<span class="cstat-no" title="statement not covered" >        code = css.charCodeAt(pos);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (code === NEWLINE || code === FEED || code === CR &amp;&amp; css.charCodeAt(pos + 1) !== NEWLINE) {</span>
+<span class="cstat-no" title="statement not covered" >            offset = pos;</span>
+<span class="cstat-no" title="statement not covered" >            line += 1;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        switch (code) {</span>
+            case NEWLINE:
+            case SPACE:
+            case TAB:
+            case CR:
+            case FEED:
+<span class="cstat-no" title="statement not covered" >                next = pos;</span>
+<span class="cstat-no" title="statement not covered" >                do {</span>
+<span class="cstat-no" title="statement not covered" >                    next += 1;</span>
+<span class="cstat-no" title="statement not covered" >                    code = css.charCodeAt(next);</span>
+<span class="cstat-no" title="statement not covered" >                    if (code === NEWLINE) {</span>
+<span class="cstat-no" title="statement not covered" >                        offset = next;</span>
+<span class="cstat-no" title="statement not covered" >                        line += 1;</span>
+                    }
+                } while (code === SPACE || code === NEWLINE || code === TAB || code === CR || code === FEED);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                tokens.push(['space', css.slice(pos, next)]);</span>
+<span class="cstat-no" title="statement not covered" >                pos = next - 1;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case OPEN_SQUARE:
+<span class="cstat-no" title="statement not covered" >                tokens.push(['[', '[', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case CLOSE_SQUARE:
+<span class="cstat-no" title="statement not covered" >                tokens.push([']', ']', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case OPEN_CURLY:
+<span class="cstat-no" title="statement not covered" >                tokens.push(['{', '{', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case CLOSE_CURLY:
+<span class="cstat-no" title="statement not covered" >                tokens.push(['}', '}', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case COLON:
+<span class="cstat-no" title="statement not covered" >                tokens.push([':', ':', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case SEMICOLON:
+<span class="cstat-no" title="statement not covered" >                tokens.push([';', ';', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case OPEN_PARENTHESES:
+<span class="cstat-no" title="statement not covered" >                prev = tokens.length ? tokens[tokens.length - 1][1] : '';</span>
+<span class="cstat-no" title="statement not covered" >                n = css.charCodeAt(pos + 1);</span>
+<span class="cstat-no" title="statement not covered" >                if (prev === 'url' &amp;&amp; n !== SINGLE_QUOTE &amp;&amp; n !== DOUBLE_QUOTE &amp;&amp; n !== SPACE &amp;&amp; n !== NEWLINE &amp;&amp; n !== TAB &amp;&amp; n !== FEED &amp;&amp; n !== CR) {</span>
+<span class="cstat-no" title="statement not covered" >                    next = pos;</span>
+<span class="cstat-no" title="statement not covered" >                    do {</span>
+<span class="cstat-no" title="statement not covered" >                        escaped = false;</span>
+<span class="cstat-no" title="statement not covered" >                        next = css.indexOf(')', next + 1);</span>
+<span class="cstat-no" title="statement not covered" >                        if (next === -1) {</span>
+<span class="cstat-no" title="statement not covered" >                            if (ignore) {</span>
+<span class="cstat-no" title="statement not covered" >                                next = pos;</span>
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            } else {
+<span class="cstat-no" title="statement not covered" >                                unclosed('bracket');</span>
+                            }
+                        }
+<span class="cstat-no" title="statement not covered" >                        escapePos = next;</span>
+<span class="cstat-no" title="statement not covered" >                        while (css.charCodeAt(escapePos - 1) === BACKSLASH) {</span>
+<span class="cstat-no" title="statement not covered" >                            escapePos -= 1;</span>
+<span class="cstat-no" title="statement not covered" >                            escaped = !escaped;</span>
+                        }
+                    } while (escaped);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    tokens.push(['brackets', css.slice(pos, next + 1), line, pos - offset, line, next - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                    pos = next;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    next = css.indexOf(')', pos + 1);</span>
+<span class="cstat-no" title="statement not covered" >                    content = css.slice(pos, next + 1);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (next === -1 || RE_BAD_BRACKET.test(content)) {</span>
+<span class="cstat-no" title="statement not covered" >                        tokens.push(['(', '(', line, pos - offset]);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        tokens.push(['brackets', content, line, pos - offset, line, next - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                        pos = next;</span>
+                    }
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case CLOSE_PARENTHESES:
+<span class="cstat-no" title="statement not covered" >                tokens.push([')', ')', line, pos - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case SINGLE_QUOTE:
+            case DOUBLE_QUOTE:
+<span class="cstat-no" title="statement not covered" >                quote = code === SINGLE_QUOTE ? '\'' : '"';</span>
+<span class="cstat-no" title="statement not covered" >                next = pos;</span>
+<span class="cstat-no" title="statement not covered" >                do {</span>
+<span class="cstat-no" title="statement not covered" >                    escaped = false;</span>
+<span class="cstat-no" title="statement not covered" >                    next = css.indexOf(quote, next + 1);</span>
+<span class="cstat-no" title="statement not covered" >                    if (next === -1) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (ignore) {</span>
+<span class="cstat-no" title="statement not covered" >                            next = pos + 1;</span>
+<span class="cstat-no" title="statement not covered" >                            break;</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            unclosed('string');</span>
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    escapePos = next;</span>
+<span class="cstat-no" title="statement not covered" >                    while (css.charCodeAt(escapePos - 1) === BACKSLASH) {</span>
+<span class="cstat-no" title="statement not covered" >                        escapePos -= 1;</span>
+<span class="cstat-no" title="statement not covered" >                        escaped = !escaped;</span>
+                    }
+                } while (escaped);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                content = css.slice(pos, next + 1);</span>
+<span class="cstat-no" title="statement not covered" >                lines = content.split('\n');</span>
+<span class="cstat-no" title="statement not covered" >                last = lines.length - 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (last &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    nextLine = line + last;</span>
+<span class="cstat-no" title="statement not covered" >                    nextOffset = next - lines[last].length;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    nextLine = line;</span>
+<span class="cstat-no" title="statement not covered" >                    nextOffset = offset;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                tokens.push(['string', css.slice(pos, next + 1), line, pos - offset, nextLine, next - nextOffset]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                offset = nextOffset;</span>
+<span class="cstat-no" title="statement not covered" >                line = nextLine;</span>
+<span class="cstat-no" title="statement not covered" >                pos = next;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case AT:
+<span class="cstat-no" title="statement not covered" >                RE_AT_END.lastIndex = pos + 1;</span>
+<span class="cstat-no" title="statement not covered" >                RE_AT_END.test(css);</span>
+<span class="cstat-no" title="statement not covered" >                if (RE_AT_END.lastIndex === 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    next = css.length - 1;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    next = RE_AT_END.lastIndex - 2;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                tokens.push(['at-word', css.slice(pos, next + 1), line, pos - offset, line, next - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                pos = next;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            case BACKSLASH:
+<span class="cstat-no" title="statement not covered" >                next = pos;</span>
+<span class="cstat-no" title="statement not covered" >                escape = true;</span>
+<span class="cstat-no" title="statement not covered" >                while (css.charCodeAt(next + 1) === BACKSLASH) {</span>
+<span class="cstat-no" title="statement not covered" >                    next += 1;</span>
+<span class="cstat-no" title="statement not covered" >                    escape = !escape;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                code = css.charCodeAt(next + 1);</span>
+<span class="cstat-no" title="statement not covered" >                if (escape &amp;&amp; code !== SLASH &amp;&amp; code !== SPACE &amp;&amp; code !== NEWLINE &amp;&amp; code !== TAB &amp;&amp; code !== CR &amp;&amp; code !== FEED) {</span>
+<span class="cstat-no" title="statement not covered" >                    next += 1;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                tokens.push(['word', css.slice(pos, next + 1), line, pos - offset, line, next - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                pos = next;</span>
+<span class="cstat-no" title="statement not covered" >                break;</span>
+&nbsp;
+            default:
+<span class="cstat-no" title="statement not covered" >                if (code === SLASH &amp;&amp; css.charCodeAt(pos + 1) === ASTERISK) {</span>
+<span class="cstat-no" title="statement not covered" >                    next = css.indexOf('*/', pos + 2) + 1;</span>
+<span class="cstat-no" title="statement not covered" >                    if (next === 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (ignore) {</span>
+<span class="cstat-no" title="statement not covered" >                            next = css.length;</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            unclosed('comment');</span>
+                        }
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    content = css.slice(pos, next + 1);</span>
+<span class="cstat-no" title="statement not covered" >                    lines = content.split('\n');</span>
+<span class="cstat-no" title="statement not covered" >                    last = lines.length - 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (last &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        nextLine = line + last;</span>
+<span class="cstat-no" title="statement not covered" >                        nextOffset = next - lines[last].length;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        nextLine = line;</span>
+<span class="cstat-no" title="statement not covered" >                        nextOffset = offset;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    tokens.push(['comment', content, line, pos - offset, nextLine, next - nextOffset]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    offset = nextOffset;</span>
+<span class="cstat-no" title="statement not covered" >                    line = nextLine;</span>
+<span class="cstat-no" title="statement not covered" >                    pos = next;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    RE_WORD_END.lastIndex = pos + 1;</span>
+<span class="cstat-no" title="statement not covered" >                    RE_WORD_END.test(css);</span>
+<span class="cstat-no" title="statement not covered" >                    if (RE_WORD_END.lastIndex === 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        next = css.length - 1;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        next = RE_WORD_END.lastIndex - 2;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    tokens.push(['word', css.slice(pos, next + 1), line, pos - offset, line, next - offset]);</span>
+<span class="cstat-no" title="statement not covered" >                    pos = next;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                break;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        pos++;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return tokens;</span>
+}
+module.exports = exports['default'];
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRva2VuaXplLmVzNiJdLCJuYW1lcyI6WyJ0b2tlbml6ZSIsIlNJTkdMRV9RVU9URSIsIkRPVUJMRV9RVU9URSIsIkJBQ0tTTEFTSCIsIlNMQVNIIiwiTkVXTElORSIsIlNQQUNFIiwiRkVFRCIsIlRBQiIsIkNSIiwiT1BFTl9TUVVBUkUiLCJDTE9TRV9TUVVBUkUiLCJPUEVOX1BBUkVOVEhFU0VTIiwiQ0xPU0VfUEFSRU5USEVTRVMiLCJPUEVOX0NVUkxZIiwiQ0xPU0VfQ1VSTFkiLCJTRU1JQ09MT04iLCJBU1RFUklTSyIsIkNPTE9OIiwiQVQiLCJSRV9BVF9FTkQiLCJSRV9XT1JEX0VORCIsIlJFX0JBRF9CUkFDS0VUIiwiaW5wdXQiLCJvcHRpb25zIiwidG9rZW5zIiwiY3NzIiwidmFsdWVPZiIsImlnbm9yZSIsImlnbm9yZUVycm9ycyIsImNvZGUiLCJuZXh0IiwicXVvdGUiLCJsaW5lcyIsImxhc3QiLCJjb250ZW50IiwiZXNjYXBlIiwibmV4dExpbmUiLCJuZXh0T2Zmc2V0IiwiZXNjYXBlZCIsImVzY2FwZVBvcyIsInByZXYiLCJuIiwibGVuZ3RoIiwib2Zmc2V0IiwibGluZSIsInBvcyIsInVuY2xvc2VkIiwid2hhdCIsImVycm9yIiwiY2hhckNvZGVBdCIsInB1c2giLCJzbGljZSIsImluZGV4T2YiLCJ0ZXN0Iiwic3BsaXQiLCJsYXN0SW5kZXgiXSwibWFwcGluZ3MiOiI7OztrQkF3QndCQSxRO0FBeEJ4QixJQUFNQyxpQkFBTjtBQUNBLElBQU1DLGlCQUFOO0FBQ0EsSUFBTUMsY0FBTjtBQUNBLElBQU1DLFVBQU47QUFDQSxJQUFNQyxZQUFOO0FBQ0EsSUFBTUMsVUFBTjtBQUNBLElBQU1DLFNBQU47QUFDQSxJQUFNQyxPQUFOO0FBQ0EsSUFBTUMsT0FBTjtBQUNBLElBQU1DLGdCQUFOO0FBQ0EsSUFBTUMsaUJBQU47QUFDQSxJQUFNQyxxQkFBTjtBQUNBLElBQU1DLHNCQUFOO0FBQ0EsSUFBTUMsZ0JBQU47QUFDQSxJQUFNQyxpQkFBTjtB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LEdBQWEsQ0FBcEI7QUFDSCxxQkFGRCxNQUVPO0FBQ0haLCtCQUFPVixZQUFZbUMsU0FBWixHQUF3QixDQUEvQjtBQUNIOztBQUVEL0IsMkJBQU8wQixJQUFQLENBQVksQ0FBQyxNQUFELEVBQVN6QixJQUFJMEIsS0FBSixDQUFVTixHQUFWLEVBQWVmLE9BQU8sQ0FBdEIsQ0FBVCxFQUNSYyxJQURRLEVBQ0ZDLE1BQU9GLE1BREwsRUFFUkMsSUFGUSxFQUVGZCxPQUFPYSxNQUZMLENBQVo7QUFJQUUsMEJBQU1mLElBQU47QUFDSDs7QUFFRDtBQXRPSjs7QUF5T0FlO0FBQ0g7O0FBRUQsV0FBT3JCLE1BQVA7QUFDSCIsImZpbGUiOiJ0b2tlbml6ZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IFNJTkdMRV9RVU9URSAgICAgID0gJ1xcJycuY2hhckNvZGVBdCgwKTtcbmNvbnN0IERPVUJMRV9RVU9URSAgICAgID0gICdcIicuY2hhckNvZGVBdCgwKTtcbmNvbnN0IEJBQ0tTTEFTSCAgICAgICAgID0gJ1xcXFwnLmNoYXJDb2RlQXQoMCk7XG5jb25zdCBTTEFTSCAgICAgICAgICAgICA9ICAnLycuY2hhckNvZGVBdCgwKTtcbmNvbnN0IE5FV0xJTkUgICAgICAgICAgID0gJ1xcbicuY2hhckNvZGVBdCgwKTtcbmNvbnN0IFNQQUNFICAgICAgICAgICAgID0gICcgJy5jaGFyQ29kZUF0KDApO1xuY29uc3QgRkVFRCAgICAgICAgICAgICAgPSAnXFxmJy5jaGFyQ29kZUF0KDApO1xuY29uc3QgVEFCICAgICAgICAgICAgICAgPSAnXFx0Jy5jaGFyQ29kZUF0KDApO1xuY29uc3QgQ1IgICAgICAgICAgICAgICAgPSAnXFxyJy5jaGFyQ29kZUF0KDApO1xuY29uc3QgT1BFTl9TUVVBUkUgICAgICAgPSAgJ1snLmNoYXJDb2RlQXQoMCk7XG5jb25zdCBDTE9TRV9TUVVBUkUgICAgICA9ICAnXScuY2hhckNvZGVBdCgwKTtcbmNvbnN0IE9QRU5fUEFSRU5USEVTRVMgID0gICcoJy5jaGFyQ29kZUF0KDApO1xuY29uc3QgQ0xPU0VfUEFSRU5USEVTRVMgPSAgJyknLmNoYXJDb2RlQXQoMCk7XG5jb25zdCBPUEVOX0NVUkxZICAgICAgICA9ICAneycuY2hhckNvZGVBdCgwKTtcbmNvbnN0IENMT1NFX0NVUkxZICAgICAgID0gICd9Jy5jaGFyQ29kZUF0KDApO1xuY29uc3QgU0VNSUNPTE9OICAgICAgICAgPSAgJzsnLmNoYXJDb2RlQXQoMCk7XG5jb25zdCBBU1RFUklTSyAgICAgICAgICA9ICAnKicuY2hhckNvZGVBdCgwKTtcbmNvbnN0IENPTE9OICAgICAgICAgICAgID0gICc6Jy5jaGFyQ29kZUF0KDApO1xuY29uc3QgQVQgICAgICAgICAgICAgICAgPSAgJ0AnLmNoYXJDb2RlQXQoMCk7XG5cbmNvbnN0IFJFX0FUX0VORCAgICAgID0gL1sgXFxuXFx0XFxyXFxmXFx7XFwoXFwpJ1wiXFxcXDsvXFxbXFxdI10vZztcbmNvbnN0IFJFX1dPUkRfRU5EICAgID0gL1sgXFxuXFx0XFxyXFxmXFwoXFwpXFx7XFx9OjtAISdcIlxcXFxcXF1cXFsjXXxcXC8oPz1cXCopL2c7XG5jb25zdCBSRV9CQURfQlJBQ0tFVCA9IC8uW1xcXFxcXC9cXChcIidcXG5dLztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gdG9rZW5pemUoaW5wdXQsIG9wdGlvbnMgPSB7IH0pIHtcbiAgICBsZXQgdG9rZW5zID0gW107XG4gICAgbGV0IGNzcyAgICA9IGlucHV0LmNzcy52YWx1ZU9mKCk7XG5cbiAgICBsZXQgaWdub3JlID0gb3B0aW9ucy5pZ25vcmVFcnJvcnM7XG5cbiAgICBsZXQgY29kZSwgbmV4dCwgcXVvdGUsIGxpbmVzLCBsYXN0LCBjb250ZW50LCBlc2NhcGUsXG4gICAgICAgIG5leHRMaW5lLCBuZXh0T2Zmc2V0LCBlc2NhcGVkLCBlc2NhcGVQb3MsIHByZXYsIG47XG5cbiAgICBsZXQgbGVuZ3RoID0gY3NzLmxlbmd0aDtcbiAgICBsZXQgb2Zmc2V0ID0gLTE7XG4gICAgbGV0IGxpbmUgICA9ICAxO1xuICAgIGxldCBwb3MgICAgPSAgMDtcblxuICAgIGZ1bmN0aW9uIHVuY2xvc2VkKHdoYXQpIHtcbiAgICAgICAgdGhyb3cgaW5wdXQuZXJyb3IoJ1VuY2xvc2VkICcgKyB3aGF0LCBsaW5lLCBwb3MgLSBvZmZzZXQpO1xuICAgIH1cblxuICAgIHdoaWxlICggcG9zIDwgbGVuZ3RoICkge1xuICAgICAgICBjb2RlID0gY3NzLmNoYXJDb2RlQXQocG9zKTtcblxuICAgICAgICBpZiAoIGNvZGUgPT09IE5FV0xJTkUgfHwgY29kZSA9PT0gRkVFRCB8fFxuICAgICAgICAgICAgIGNvZGUgPT09IENSICYmIGNzcy5jaGFyQ29kZUF0KHBvcyArIDEpICE9PSBORVdMSU5FICkge1xuICAgICAgICAgICAgb2Zmc2V0ID0gcG9zO1xuICAgICAgICAgICAgbGluZSAgKz0gMTtcbiAgICAgICAgfVxuXG4gICAgICAgIHN3aXRjaCAoIGNvZGUgKSB7XG4gICAgICAgIGNhc2UgTkVXTElORTpcbiAgICAgICAgY2FzZSBTUEFDRTpcbiAgICAgICAgY2FzZSBUQUI6XG4gICAgICAgIGNhc2UgQ1I6XG4gICAgICAgIGNhc2UgRkVFRDpcbiAgICAgICAgICAgIG5leHQgPSBwb3M7XG4gICAgICAgICAgICBkbyB7XG4gICAgICAgICAgICAgICAgbmV4dCArPSAxO1xuICAgICAgICAgICAgICAgIGNvZGUgPSBjc3MuY2hhckNvZGVBdChuZXh0KTtcbiAgICAgICAgICAgICAgICBpZiAoIGNvZGUgPT09IE5FV0xJTkUgKSB7XG4gICAgICAgICAgICAgICAgICAgIG9mZnNldCA9IG5leHQ7XG4gICAgICAgICAgICAgICAgICAgIGxpbmUgICs9IDE7XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgfSB3aGlsZSAoIGNvZGUgPT09IFNQQUNFICAgfHxcbiAgICAgICAgICAgICAgICAgICAgICBjb2RlID09PSBORVdMSU5FIHx8XG4gICAgICAgICAgICAgICAgICAgICAgY29kZSA9PT0gVEFCICAgICB8fFxuICAgICAgICAgICAgICAgICAgICAgIGNvZGUgPT09IENSICAgICAgfHxcbiAgICAgICAgICAgICAgICAgICAgICBjb2RlID09PSBGRUVEICk7XG5cbiAgICAgICAgICAgIHRva2Vucy5wdXNoKFsnc3BhY2UnLCBjc3Muc2xpY2UocG9zLCBuZXh0KV0pO1xuICAgICAgICAgICAgcG9zID0gbmV4dCAtIDE7XG4gICAgICAgICAgICBicmVhaztcblxuICAgICAgICBjYXNlIE9QRU5fU1FVQVJFOlxuICAgICAgICAgICAgdG9rZW5zLnB1c2goWydbJywgJ1snLCBsaW5lLCBwb3MgLSBvZmZzZXRdKTtcbiAgICAgICAgICAgIGJyZWFrO1xuXG4gICAgICAgIGNhc2UgQ0xPU0VfU1FVQVJFOlxuICAgICAgICAgICAgdG9rZW5zLnB1c2goWyddJywgJ10nLCBsaW5lLCBwb3MgLSBvZmZzZXRdKTtcbiAgICAgICAgICAgIGJyZWFrO1xuXG4gICAgICAgIGNhc2UgT1BFTl9DVVJMWTpcbiAgICAgICAgICAgIHRva2Vucy5wdXNoKFsneycsICd7JywgbGluZSwgcG9zIC0gb2Zmc2V0XSk7XG4gICAgICAgICAgICBicmVhaztcblxuICAgICAgICBjYXNlIENMT1NFX0NVUkxZOlxuICAgICAgICAgICAgdG9rZW5zLnB1c2goWyd9JywgJ30nLCBsaW5lLCBwb3MgLSBvZmZzZXRdKTtcbiAgICAgICAgICAgIGJyZWFrO1xuXG4gICAgICAgIGNhc2UgQ09MT046XG4gICAgICAgICAgICB0b2tlbnMucHVzaChbJzonLCAnOicsIGxpbmUsIHBvcyAtIG9mZnNldF0pO1xuICAgICAgICAgICAgYnJlYWs7XG5cbiAgICAgICAgY2FzZSBTRU1JQ09MT046XG4gICAgICAgICAgICB0b2tlbnMucHVzaChbJzsnLCAnOycsIGxpbmUsIHBvcyAtIG9mZnNldF0pO1xuICAgICAgICAgICAgYnJlYWs7XG5cbiAgICAgICAgY2FzZSBPUEVOX1BBUkVOVEhFU0VTOlxuICAgICAgICAgICAgcHJldiA9IHRva2Vucy5sZW5ndGggPyB0b2tlbnNbdG9rZW5zLmxlbmd0aCAtIDFdWzFdIDogJyc7XG4gICAgICAgICAgICBuICAgID0gY3NzLmNoYXJDb2RlQXQocG9zICsgMSk7XG4gICAgICAgICAgICBpZiAoIHByZXYgPT09ICd1cmwnICYmIG4gIT09IFNJTkdMRV9RVU9URSAmJiBuICE9PSBET1VCTEVfUVVPVEUgJiZcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiAhPT0gU1BBQ0UgJiYgbiAhPT0gTkVXTElORSAmJiBuICE9PSBUQUIgJiZcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbiAhPT0gRkVFRCAmJiBuICE9PSBDUiApIHtcbiAgICAgICAgICAgICAgICBuZXh0ID0gcG9zO1xuICAgICAgICAgICAgICAgIGRvIHtcbiAgICAgICAgICAgICAgICAgICAgZXNjYXBlZCA9IGZhbHNlO1xuICAgICAgICAgICAgICAgICAgICBuZXh0ICAgID0gY3NzLmluZGV4T2YoJyknLCBuZXh0ICsgMSk7XG4gICAgICAgICAgICAgICAgICAgIGlmICggbmV4dCA9PT0gLTEgKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBpZiAoIGlnbm9yZSApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBuZXh0ID0gcG9zO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bmNsb3NlZCgnYnJhY2tldCcpO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIGVzY2FwZVBvcyA9IG5leHQ7XG4gICAgICAgICAgICAgICAgICAgIHdoaWxlICggY3NzLmNoYXJDb2RlQXQoZXNjYXBlUG9zIC0gMSkgPT09IEJBQ0tTTEFTSCApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIGVzY2FwZVBvcyAtPSAxO1xuICAgICAgICAgICAgICAgICAgICAgICAgZXNjYXBlZCA9ICFlc2NhcGVkO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfSB3aGlsZSAoIGVzY2FwZWQgKTtcblxuICAgICAgICAgICAgICAgIHRva2Vucy5wdXNoKFsnYnJhY2tldHMnLCBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSksXG4gICAgICAgICAgICAgICAgICAgIGxpbmUsIHBvcyAgLSBvZmZzZXQsXG4gICAgICAgICAgICAgICAgICAgIGxpbmUsIG5leHQgLSBvZmZzZXRcbiAgICAgICAgICAgICAgICBdKTtcbiAgICAgICAgICAgICAgICBwb3MgPSBuZXh0O1xuXG4gICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgIG5leHQgICAgPSBjc3MuaW5kZXhPZignKScsIHBvcyArIDEpO1xuICAgICAgICAgICAgICAgIGNvbnRlbnQgPSBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSk7XG5cbiAgICAgICAgICAgICAgICBpZiAoIG5leHQgPT09IC0xIHx8IFJFX0JBRF9CUkFDS0VULnRlc3QoY29udGVudCkgKSB7XG4gICAgICAgICAgICAgICAgICAgIHRva2Vucy5wdXNoKFsnKCcsICcoJywgbGluZSwgcG9zIC0gb2Zmc2V0XSk7XG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgdG9rZW5zLnB1c2goWydicmFja2V0cycsIGNvbnRlbnQsXG4gICAgICAgICAgICAgICAgICAgICAgICBsaW5lLCBwb3MgIC0gb2Zmc2V0LFxuICAgICAgICAgICAgICAgICAgICAgICAgbGluZSwgbmV4dCAtIG9mZnNldFxuICAgICAgICAgICAgICAgICAgICBdKTtcbiAgICAgICAgICAgICAgICAgICAgcG9zID0gbmV4dDtcbiAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIGJyZWFrO1xuXG4gICAgICAgIGNhc2UgQ0xPU0VfUEFSRU5USEVTRVM6XG4gICAgICAgICAgICB0b2tlbnMucHVzaChbJyknLCAnKScsIGxpbmUsIHBvcyAtIG9mZnNldF0pO1xuICAgICAgICAgICAgYnJlYWs7XG5cbiAgICAgICAgY2FzZSBTSU5HTEVfUVVPVEU6XG4gICAgICAgIGNhc2UgRE9VQkxFX1FVT1RFOlxuICAgICAgICAgICAgcXVvdGUgPSBjb2RlID09PSBTSU5HTEVfUVVPVEUgPyAnXFwnJyA6ICdcIic7XG4gICAgICAgICAgICBuZXh0ICA9IHBvcztcbiAgICAgICAgICAgIGRvIHtcbiAgICAgICAgICAgICAgICBlc2NhcGVkID0gZmFsc2U7XG4gICAgICAgICAgICAgICAgbmV4dCAgICA9IGNzcy5pbmRleE9mKHF1b3RlLCBuZXh0ICsgMSk7XG4gICAgICAgICAgICAgICAgaWYgKCBuZXh0ID09PSAtMSApIHtcbiAgICAgICAgICAgICAgICAgICAgaWYgKCBpZ25vcmUgKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICBuZXh0ID0gcG9zICsgMTtcbiAgICAgICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgdW5jbG9zZWQoJ3N0cmluZycpO1xuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIGVzY2FwZVBvcyA9IG5leHQ7XG4gICAgICAgICAgICAgICAgd2hpbGUgKCBjc3MuY2hhckNvZGVBdChlc2NhcGVQb3MgLSAxKSA9PT0gQkFDS1NMQVNIICkge1xuICAgICAgICAgICAgICAgICAgICBlc2NhcGVQb3MgLT0gMTtcbiAgICAgICAgICAgICAgICAgICAgZXNjYXBlZCA9ICFlc2NhcGVkO1xuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH0gd2hpbGUgKCBlc2NhcGVkICk7XG5cbiAgICAgICAgICAgIGNvbnRlbnQgPSBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSk7XG4gICAgICAgICAgICBsaW5lcyAgID0gY29udGVudC5zcGxpdCgnXFxuJyk7XG4gICAgICAgICAgICBsYXN0ICAgID0gbGluZXMubGVuZ3RoIC0gMTtcblxuICAgICAgICAgICAgaWYgKCBsYXN0ID4gMCApIHtcbiAgICAgICAgICAgICAgICBuZXh0TGluZSAgID0gbGluZSArIGxhc3Q7XG4gICAgICAgICAgICAgICAgbmV4dE9mZnNldCA9IG5leHQgLSBsaW5lc1tsYXN0XS5sZW5ndGg7XG4gICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgIG5leHRMaW5lICAgPSBsaW5lO1xuICAgICAgICAgICAgICAgIG5leHRPZmZzZXQgPSBvZmZzZXQ7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIHRva2Vucy5wdXNoKFsnc3RyaW5nJywgY3NzLnNsaWNlKHBvcywgbmV4dCArIDEpLFxuICAgICAgICAgICAgICAgIGxpbmUsIHBvcyAgLSBvZmZzZXQsXG4gICAgICAgICAgICAgICAgbmV4dExpbmUsIG5leHQgLSBuZXh0T2Zmc2V0XG4gICAgICAgICAgICBdKTtcblxuICAgICAgICAgICAgb2Zmc2V0ID0gbmV4dE9mZnNldDtcbiAgICAgICAgICAgIGxpbmUgICA9IG5leHRMaW5lO1xuICAgICAgICAgICAgcG9zICAgID0gbmV4dDtcbiAgICAgICAgICAgIGJyZWFrO1xuXG4gICAgICAgIGNhc2UgQVQ6XG4gICAgICAgICAgICBSRV9BVF9FTkQubGFzdEluZGV4ID0gcG9zICsgMTtcbiAgICAgICAgICAgIFJFX0FUX0VORC50ZXN0KGNzcyk7XG4gICAgICAgICAgICBpZiAoIFJFX0FUX0VORC5sYXN0SW5kZXggPT09IDAgKSB7XG4gICAgICAgICAgICAgICAgbmV4dCA9IGNzcy5sZW5ndGggLSAxO1xuICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICBuZXh0ID0gUkVfQVRfRU5ELmxhc3RJbmRleCAtIDI7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICB0b2tlbnMucHVzaChbJ2F0LXdvcmQnLCBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSksXG4gICAgICAgICAgICAgICAgbGluZSwgcG9zICAtIG9mZnNldCxcbiAgICAgICAgICAgICAgICBsaW5lLCBuZXh0IC0gb2Zmc2V0XG4gICAgICAgICAgICBdKTtcbiAgICAgICAgICAgIHBvcyA9IG5leHQ7XG4gICAgICAgICAgICBicmVhaztcblxuICAgICAgICBjYXNlIEJBQ0tTTEFTSDpcbiAgICAgICAgICAgIG5leHQgICA9IHBvcztcbiAgICAgICAgICAgIGVzY2FwZSA9IHRydWU7XG4gICAgICAgICAgICB3aGlsZSAoIGNzcy5jaGFyQ29kZUF0KG5leHQgKyAxKSA9PT0gQkFDS1NMQVNIICkge1xuICAgICAgICAgICAgICAgIG5leHQgICs9IDE7XG4gICAgICAgICAgICAgICAgZXNjYXBlID0gIWVzY2FwZTtcbiAgICAgICAgICAgIH1cbiAgICAgICAgICAgIGNvZGUgPSBjc3MuY2hhckNvZGVBdChuZXh0ICsgMSk7XG4gICAgICAgICAgICBpZiAoIGVzY2FwZSAmJiAoY29kZSAhPT0gU0xBU0ggICAmJlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvZGUgIT09IFNQQUNFICAgJiZcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb2RlICE9PSBORVdMSU5FICYmXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29kZSAhPT0gVEFCICAgICAmJlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvZGUgIT09IENSICAgICAgJiZcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb2RlICE9PSBGRUVEICkgKSB7XG4gICAgICAgICAgICAgICAgbmV4dCArPSAxO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgdG9rZW5zLnB1c2goWyd3b3JkJywgY3NzLnNsaWNlKHBvcywgbmV4dCArIDEpLFxuICAgICAgICAgICAgICAgIGxpbmUsIHBvcyAgLSBvZmZzZXQsXG4gICAgICAgICAgICAgICAgbGluZSwgbmV4dCAtIG9mZnNldFxuICAgICAgICAgICAgXSk7XG4gICAgICAgICAgICBwb3MgPSBuZXh0O1xuICAgICAgICAgICAgYnJlYWs7XG5cbiAgICAgICAgZGVmYXVsdDpcbiAgICAgICAgICAgIGlmICggY29kZSA9PT0gU0xBU0ggJiYgY3NzLmNoYXJDb2RlQXQocG9zICsgMSkgPT09IEFTVEVSSVNLICkge1xuICAgICAgICAgICAgICAgIG5leHQgPSBjc3MuaW5kZXhPZignKi8nLCBwb3MgKyAyKSArIDE7XG4gICAgICAgICAgICAgICAgaWYgKCBuZXh0ID09PSAwICkge1xuICAgICAgICAgICAgICAgICAgICBpZiAoIGlnbm9yZSApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgIG5leHQgPSBjc3MubGVuZ3RoO1xuICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgdW5jbG9zZWQoJ2NvbW1lbnQnKTtcbiAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIH1cblxuICAgICAgICAgICAgICAgIGNvbnRlbnQgPSBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSk7XG4gICAgICAgICAgICAgICAgbGluZXMgICA9IGNvbnRlbnQuc3BsaXQoJ1xcbicpO1xuICAgICAgICAgICAgICAgIGxhc3QgICAgPSBsaW5lcy5sZW5ndGggLSAxO1xuXG4gICAgICAgICAgICAgICAgaWYgKCBsYXN0ID4gMCApIHtcbiAgICAgICAgICAgICAgICAgICAgbmV4dExpbmUgICA9IGxpbmUgKyBsYXN0O1xuICAgICAgICAgICAgICAgICAgICBuZXh0T2Zmc2V0ID0gbmV4dCAtIGxpbmVzW2xhc3RdLmxlbmd0aDtcbiAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICBuZXh0TGluZSAgID0gbGluZTtcbiAgICAgICAgICAgICAgICAgICAgbmV4dE9mZnNldCA9IG9mZnNldDtcbiAgICAgICAgICAgICAgICB9XG5cbiAgICAgICAgICAgICAgICB0b2tlbnMucHVzaChbJ2NvbW1lbnQnLCBjb250ZW50LFxuICAgICAgICAgICAgICAgICAgICBsaW5lLCAgICAgcG9zICAtIG9mZnNldCxcbiAgICAgICAgICAgICAgICAgICAgbmV4dExpbmUsIG5leHQgLSBuZXh0T2Zmc2V0XG4gICAgICAgICAgICAgICAgXSk7XG5cbiAgICAgICAgICAgICAgICBvZmZzZXQgPSBuZXh0T2Zmc2V0O1xuICAgICAgICAgICAgICAgIGxpbmUgICA9IG5leHRMaW5lO1xuICAgICAgICAgICAgICAgIHBvcyAgICA9IG5leHQ7XG5cbiAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgUkVfV09SRF9FTkQubGFzdEluZGV4ID0gcG9zICsgMTtcbiAgICAgICAgICAgICAgICBSRV9XT1JEX0VORC50ZXN0KGNzcyk7XG4gICAgICAgICAgICAgICAgaWYgKCBSRV9XT1JEX0VORC5sYXN0SW5kZXggPT09IDAgKSB7XG4gICAgICAgICAgICAgICAgICAgIG5leHQgPSBjc3MubGVuZ3RoIC0gMTtcbiAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICBuZXh0ID0gUkVfV09SRF9FTkQubGFzdEluZGV4IC0gMjtcbiAgICAgICAgICAgICAgICB9XG5cbiAgICAgICAgICAgICAgICB0b2tlbnMucHVzaChbJ3dvcmQnLCBjc3Muc2xpY2UocG9zLCBuZXh0ICsgMSksXG4gICAgICAgICAgICAgICAgICAgIGxpbmUsIHBvcyAgLSBvZmZzZXQsXG4gICAgICAgICAgICAgICAgICAgIGxpbmUsIG5leHQgLSBvZmZzZXRcbiAgICAgICAgICAgICAgICBdKTtcbiAgICAgICAgICAgICAgICBwb3MgPSBuZXh0O1xuICAgICAgICAgICAgfVxuXG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgfVxuXG4gICAgICAgIHBvcysrO1xuICAgIH1cblxuICAgIHJldHVybiB0b2tlbnM7XG59XG4iXX0=
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 07:50:15 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
