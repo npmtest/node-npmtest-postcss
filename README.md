@@ -1,7 +1,7 @@
-# test coverage for  [postcss (v5.2.16)](http://postcss.org/)  [![npm package](https://img.shields.io/npm/v/npmtest-postcss.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-postcss) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-postcss.svg)](https://travis-ci.org/npmtest/node-npmtest-postcss)
+# test coverage for  [postcss (v5.2.17)](http://postcss.org/)  [![npm package](https://img.shields.io/npm/v/npmtest-postcss.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-postcss) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-postcss.svg)](https://travis-ci.org/npmtest/node-npmtest-postcss)
 #### Tool for transforming styles with JS plugins
 
-[![NPM](https://nodei.co/npm/postcss.png?downloads=true)](https://www.npmjs.com/package/postcss)
+[![NPM](https://nodei.co/npm/postcss.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/postcss)
 
 | git-branch : | [alpha](https://github.com/npmtest/node-npmtest-postcss/tree/alpha)|
 |--:|:--|
@@ -9,11 +9,11 @@
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-postcss/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-postcss/build/test-report.html)|
 | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-postcss/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-postcss/tree/gh-pages/build)|
 
-[![istanbul-coverage](https://npmtest.github.io/node-npmtest-postcss/build/screenCapture.buildCustomOrg.browser.coverage.html.png)](https://npmtest.github.io/node-npmtest-postcss/build/coverage.html/index.html)
+[![istanbul-coverage](https://npmtest.github.io/node-npmtest-postcss/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fcoverage.lib.html.png)](https://npmtest.github.io/node-npmtest-postcss/build/coverage.html/index.html)
 
-[![test-report](https://npmtest.github.io/node-npmtest-postcss/build/screenCapture.buildCustomOrg.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmtest%252Fnode-npmtest-postcss%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-postcss/build/test-report.html)
+[![test-report](https://npmtest.github.io/node-npmtest-postcss/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Ftest-report.html.png)](https://npmtest.github.io/node-npmtest-postcss/build/test-report.html)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-postcss/build/screenCapture.buildApidoc.browser.%252Fhome%252Ftravis%252Fbuild%252Fnpmdoc%252Fnode-npmdoc-postcss%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-postcss/build/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-postcss/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-postcss/build/apidoc.html)
 
 ![npmPackageListing](https://npmtest.github.io/node-npmtest-postcss/build/screenCapture.npmPackageListing.svg)
 
@@ -27,8 +27,7 @@
 
 {
     "author": {
-        "name": "Andrey Sitnik",
-        "email": "andrey@sitnik.ru"
+        "name": "Andrey Sitnik"
     },
     "browser": {
         "fs": false
@@ -45,18 +44,18 @@
     "description": "Tool for transforming styles with JS plugins",
     "devDependencies": {
         "ava": "^0.17.0",
-        "babel-core": "^6.23.1",
+        "babel-core": "^6.24.0",
         "babel-eslint": "^7.1.1",
         "babel-plugin-add-module-exports": "^0.2.1",
         "babel-plugin-precompile-charcodes": "^1.0.0",
-        "babel-preset-es2015": "^6.22.0",
+        "babel-preset-es2015": "^6.24.0",
         "chalk": "^1.1.3",
         "concat-with-sourcemaps": "^1.0.4",
         "del": "^2.2.2",
         "docdash": "^0.4.0",
-        "eslint": "^3.17.1",
+        "eslint": "^3.18.0",
         "eslint-config-postcss": "^2.0.2",
-        "fs-extra": "^2.0.0",
+        "fs-extra": "^1.0.0",
         "gulp": "^3.9.1",
         "gulp-ava": "^0.15.0",
         "gulp-babel": "^6.1.2",
@@ -65,18 +64,18 @@
         "gulp-run": "^1.7.1",
         "gulp-sourcemaps": "^2.4.1",
         "jsdoc": "^3.4.3",
-        "lint-staged": "^3.3.1",
+        "lint-staged": "^3.4.0",
         "postcss-parser-tests": "^5.0.11",
         "pre-commit": "^1.2.2",
         "run-sequence": "^1.2.2",
-        "sinon": "^1.17.7",
+        "sinon": "^2.0.0",
         "strip-ansi": "^3.0.1",
         "yaspeller-ci": "^0.3.0"
     },
     "directories": {},
     "dist": {
-        "shasum": "732b3100000f9ff8379a48a53839ed097376ad57",
-        "tarball": "https://registry.npmjs.org/postcss/-/postcss-5.2.16.tgz"
+        "shasum": "cf4f597b864d65c8a492b2eabe9d706c879c388b",
+        "tarball": "https://registry.npmjs.org/postcss/-/postcss-5.2.17.tgz"
     },
     "engines": {
         "node": ">=0.12"
@@ -102,12 +101,10 @@
     "main": "lib/postcss",
     "maintainers": [
         {
-            "name": "ai",
-            "email": "andrey@sitnik.ru"
+            "name": "ai"
         },
         {
-            "name": "beneb",
-            "email": "beneb.info@gmail.com"
+            "name": "beneb"
         }
     ],
     "name": "postcss",
@@ -115,7 +112,6 @@
     "pre-commit": [
         "lint-staged"
     ],
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/postcss/postcss.git"
@@ -125,7 +121,7 @@
         "test": "gulp"
     },
     "types": "lib/postcss.d.ts",
-    "version": "5.2.16"
+    "version": "5.2.17"
 }
 ```
 
